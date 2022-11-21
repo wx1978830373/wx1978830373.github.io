@@ -1,2 +1,2 @@
-# Headline
-> An awesome project.
+* [首页](/)
+* [操作指南](guide)
