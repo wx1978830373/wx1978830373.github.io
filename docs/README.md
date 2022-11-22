@@ -176,30 +176,19 @@ export default function useCar() {
   };
 }
 ```
-Vue3 可以让我们更好组织代码
-
+---
 ### 性能方面
 
 Vue3 主要在这几个方面进行了提升
 
-1. 编译阶段。对 diff 算法优化、静态提升等等
-2. 响应式系统。Proxy()替代Object.defineProperty()监听对象。监听一个对象，不需要再深度遍历，Proxy()就可以劫持整个对象
-3. 体积包减少。Compostion API 的写法，可以更好的进行 tree shaking，减少上下文没有引入的代码，减少打包后的文件体积
-4. 新增片段特性。Vue 文件的<template>标签内，不再需要强制声明一个的<div>标签，节省额外的节点开销
+* 编译阶段。对 `diff` 算法优化、静态提升等等
+* 响应式系统。`Proxy()`替代`Object.defineProperty()`监听对象。监听一个对象，不需要再深度遍历，`Proxy()`就可以劫持整个对象
+* 体积包减少。`Compostion API `的写法，可以更好的进行 `tree shaking`，减少上下文没有引入的代码，减少打包后的文件体积
+* 新增片段特性。Vue 文件的`<template>`标签内，不再需要强制声明一个的`<div>`标签，节省额外的节点开
+---
+**TreeShaking 简述：**
 
-**生命周期的不同**
+**[TreeShaking 术语解析](https://juejin.cn/post/7135217402983235592)**
+ 
 
-| vue2          | vue3              |
-| ------------- | ----------------- |
-| beforeCreate  | setup()           |
-| created       | setup()           |
-| beforeMount   | onBeforeMount     |
-| mounted       | onMounted         |
-| beforeUpdate  | onBeforeUpdate    |
-| updated       | onUpdated         |
-| beforeDestroy | onBeforeUnmount   |
-| destroyed     | onUnmounted       |
-| errorCaptured | onErrorCaptured   |
-|               | onRenderTracked   |
-|               | onRenderTriggered |
 
