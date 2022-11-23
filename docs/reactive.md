@@ -158,32 +158,16 @@ copy.count++ // warning!
 
 ## watchEffect
 ### 见解 
-* 立即运行一个函数，同时响应式地追踪其依赖，并在依赖更改时重新执行
+* `watchEffect` 会立即执行一遍回调函数，如果这时函数产生了副作用，`Vue` 会自动追踪副作用的依赖关系，自动分析出侦听数据源
 ### 示例
 ```javascript
-const count = ref(0)
-watchEffect(() => console.log(count.value))
-// -> 输出 0
-count.value++
-// -> 输出 1
-```
----
-
-## watchPostEffect
-### 见解 
-* 立即运行一个函数，同时响应式地追踪其依赖，并在依赖更改时重新执行
----
-
-## watchSyncEffect
-### 见解 
-* 立即运行一个函数，同时响应式地追踪其依赖，并在依赖更改时重新执行
-### 示例
-```javascript
-const count = ref(0)
-watchEffect(() => console.log(count.value))
-// -> 输出 0
-count.value++
-// -> 输出 1
+const url = ref('https://...')
+const data = ref(null)
+// 一个参数就可以搞定
+watchEffect(async () => {
+  const response = await fetch(url.value)
+  data.value = await response.json()
+})
 ```
 ---
 
@@ -215,3 +199,8 @@ watch([fooRef, barRef], ([foo, bar], [prevFoo, prevBar]) => {
 })
 ```
 ---
+
+## [watch 细节 相关知识](https://juejin.cn/post/7134832274364694536#heading-4)
+## [响应式基础](https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#reactive-proxy-vs-original-1)
+## [全方位带你掌握 ref、reactive，开启 Vue3 响应式的大门](https://juejin.cn/post/7143358534481575973#heading-9)
+
