@@ -200,7 +200,8 @@ watch([fooRef, barRef], ([foo, bar], [prevFoo, prevBar]) => {
 ```
 ---
 
-## [watch 细节 相关知识](https://juejin.cn/post/7134832274364694536#heading-4)
-## [响应式基础](https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#reactive-proxy-vs-original-1)
-## [全方位带你掌握 ref、reactive，开启 Vue3 响应式的大门](https://juejin.cn/post/7143358534481575973#heading-9)
+## 相关补充
+  * [watch 细节 相关知识](https://juejin.cn/post/7134832274364694536#heading-4)
+  * [响应式基础](https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#reactive-proxy-vs-original-1)
+  * [全方位带你掌握 ref、reactive，开启 Vue3 响应式的大门](https://juejin.cn/post/7143358534481575973#heading-9)
 
