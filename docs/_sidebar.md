@@ -7,4 +7,4 @@
 * [响应式: 工具](reactiveToolFunction.md) 
 * [响应式: 进阶](reactiveProgressive.md) 
 * [依赖注入](injection.md) 
-* [vue-route](vueRouter.md) 
+* [vue-router](vueRouter.md) 
