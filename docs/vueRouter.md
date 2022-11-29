@@ -1,15 +1,28 @@
 ## Vue Router 
-* [Vue Router1111 官网](https://router.vuejs.org/zh/introduction.html)
+* [Vue Router 官网](https://router.vuejs.org/zh/introduction.html)
 
-**Vue-Router导航守卫是什么** 
+**什么是单页应用？**
 
-* 单页应用中，控制组件跳转、显示、控制的管理者。比如最常见的登录权限验证，当用户满足条件时，才让其进入导航，否则就取消跳转，并跳到登录页面让其登录。
-* 建立起url和页面组件的映射关系。
-* 组件控制器。
+**单页应用的全称是 single-page application，简称 SPA，因为整个应用就一个html，所以叫单页面，它是一种网站应用的模型。相对于传统的 Web 应用，单页应用做到了前后端分离，后端只负责处理数据提供接口，页面逻辑和页面渲染都交给了前端。前端发展到现在，单页应用的使用已经很广泛，目前时兴的 React、Vue、Angular 等前端框架均采用了 SPA 原则。随着单页应用的兴起，前端代码逐渐变得更复杂和庞大，模块化、组件化这些工程化的工作越来越多。项目的架构设计，也变得越来越重要**
 
-## 不同的历史模式
-**`Hash` 模式**
+## 简单列举单页应用优缺点
+**优**
+1. 前后端分离，分工更明确
+2. 内容的改变不需要重新加载整个页面，用户体验好。
+3. 前端组件化，工程化
 
+**缺**
+1. 不利于[搜索引擎](https://juejin.cn/post/7139676355746086949)的抓取
+2. 首次渲染速度相对较慢
+
+---
+
+* 基于`spa`思想，为`vue`框架开发了一款导航工具库---`Vue-Router`。其原理是监听`url`的变化，使组件和`url`产生映射。实现页面不刷新，交互（增删改查）`DOM`
+* 比如最常见的业务场景，页面权限验证，当用户满足条件时，才让其进入正确的导航，否则就取消跳转，并跳到登录页面。
+
+
+## [不同的历史模式](https://blog.csdn.net/weixin_44209082/article/details/124538782)
+**`Hash` 模式 （监听浏览器地址hash值变化，执行相应的js切换网页）** 
 `hash` 模式是用 `createWebHashHistory()`` 创建的：
 ```javascript
 import { createRouter, createWebHashHistory } from 'vue-router'
@@ -24,7 +37,7 @@ const router = createRouter({
 ```
 它在内部传递的实际` URL `之前使用了一个哈希字符（`#`）。由于这部分 URL 从未被发送到服务器，所以它不需要在服务器层面上进行任何特殊处理。不过，它在` SEO（搜索引擎优化） `中确实有不好的影响。如果你担心这个问题，可以使用` HTML5 `模式。
 
-**`HTML5` 模式**
+**`HTML5` 模式（利用history API实现url地址改变，网页内容改变）**
 用` createWebHistory() `创建 `HTML5` 模式，推荐使用这个模式：
 ```javascript
 import { createRouter, createWebHistory } from 'vue-router'
@@ -38,7 +51,11 @@ const router = createRouter({
 ```
 当使用这种历史模式时，URL 会看起来很 "正常"，例如 https://example.com/user/id。
 
-# HTML 标签
+## [hash与history的区别](https://blog.csdn.net/weixin_45605541/article/details/126902701)
+
+---
+
+# 自定义组件
 ```html
 <div id="app">
   <h1>Hello App!</h1>
@@ -54,12 +71,14 @@ const router = createRouter({
   <router-view></router-view>
 </div>
 ```
-## router-link
+
+[router-link](https://router.vuejs.org/zh/api/#to)
+
 `<router-link to="/">Home</router-link>`
 
 一个自定义组件` router-link `来创建链接。这使得` Vue Router `可以在不重新加载页面的情况下更改` URL`，处理` URL`的生成以及编码。我们将在后面看到如何从这些功能中获益。
 
-## router-view
+[router-view](https://codesandbox.io/s/named-views-vue-router-4-examples-rd20l?file=/src/App.vue)
 `<router-view></router-view>`
 
 `router-view `将显示与` url `对应的组件。你可以把它放在任何地方，以适应你的布局。
@@ -97,8 +116,14 @@ app.mount('#app')
 
 // 现在，应用已经启动了！
 ```
+---
 
+**[嵌套路由 案例](https://codesandbox.io/s/nested-views-vue-router-4-examples-hl326?initialpath=%2Fusers%2Feduardo)**
 
+---
+**[路由传参](https://router.vuejs.org/zh/guide/essentials/passing-props.html)**
+
+---
 
 ## 全局守卫
 
@@ -127,7 +152,7 @@ router.beforeEach((to, from, next) => {
     * 分析、更改页面标题、声明页面等辅助功能
 
 **每个守卫方法接收两个参数**
-to和from是**将要进入**和**将要离开**的路由对象,路由对象指的是平时通过this.$route获取到的路由对象。
+`to`和`from`是**将要进入**和**将要离开**的路由对象，路由对象指的是平时通过`this.$route`获取到的路由对象。
 * `to`：即将要进入的目标；
 * `from`：当前导航正要离开的路由； 
 * 可选的第三个参数 `next`， 确保 `next` 在任何给定的导航守卫中都被严格调用一次。
@@ -200,13 +225,13 @@ const routes = [
         path: 'new',
         component: PostsNew,
         // 只有经过身份验证的用户才能创建帖子
-        meta: { requiresAuth: true }
+        meta: { auth: true }
       },
       {
         path: ':id',
         component: PostsDetail
         // 任何人都可以阅读文章
-        meta: { requiresAuth: false }
+        meta: { auth: false }
       }
     ]
   }
@@ -221,6 +246,7 @@ const routes = [
 例如，根据上面的路由配置，`/posts/new` 这个` URL `将会匹配父路由记录` (path: '/posts') `以及子路由记录` (path: 'new')`。
 
 ```javascript
+// Composition api
 import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
@@ -228,6 +254,5 @@ const route = useRoute()
  console.log(route.meta);
 ```
 
-## [后台项目——权限路由](https://juejin.cn/post/6932744687660990477)
-
 ## [Fantastic-admin 官方文档](https://hooray.gitee.io/fantastic-admin/)
+## [vue-router实现原理](https://juejin.cn/post/6844903615283363848)
